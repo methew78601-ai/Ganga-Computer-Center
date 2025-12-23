@@ -8,13 +8,25 @@
   "dependencies": {
     "ejs": "^3.1.10",
     "exceljs": "^4.4.0",
-    "express": "^4.19.2",
-    "express-session": "^1.17.3",
+    "express": "^4.22.1",
+    "express-session": "^1.18.2",
     "jimp": "^1.6.0",
     "multer": "^1.4.5-lts.1",
     "nodemailer": "^6.10.1",
     "pdf-lib": "^1.17.1",
     "pdfkit": "^0.17.2",
     "qrcode": "^1.5.4"
-  }
+  },
+  "description": "��#\u0000 \u0000G\u0000a\u0000n\u0000g\u0000a\u0000-\u0000C\u0000o\u0000m\u0000p\u0000u\u0000t\u0000e\u0000r\u0000-\u0000C\u0000e\u0000n\u0000t\u0000e\u0000r\u0000\r\u0000 \u0000",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/methew78601-ai/Ganga-Computer-Center.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/methew78601-ai/Ganga-Computer-Center/issues"
+  },
+  "homepage": "https://github.com/methew78601-ai/Ganga-Computer-Center#readme"
 }
