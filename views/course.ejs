@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Courses – Anime Computers</title>
+
+  <!-- COURSE PAGE CSS -->
+  <link rel="stylesheet" href="/public/css/courses.css">
+
+  <!-- FONT AWESOME -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- COURSE PAGE JS -->
+  <script src="/public/js/course-search.js" defer></script>
+</head>
+<body>
+
+<!-- HEADER -->
+<%- include('partials/Header') %>
+
+<!-- HERO -->
+<section class="course-hero">
+  <h1>All Courses</h1>
+  <p>Search courses by name or category</p>
+
+  <div class="course-stats">
+    <span><i class="fa fa-users"></i> 10,000+ Students</span>
+    <span><i class="fa fa-book"></i> 50+ Courses</span>
+    <span><i class="fa fa-certificate"></i> Certified</span>
+  </div>
+</section>
+
+<main>
+
+<!-- SEARCH + FILTER -->
+<section class="courses-controls">
+  <input type="text" class="search-input"
+         placeholder="Search course or topic...">
+
+  <div class="chips">
+    <button class="chip active" data-filter="all">All</button>
+    <button class="chip" data-filter="programming">Programming</button>
+    <button class="chip" data-filter="fundamentals">Fundamentals</button>
+    <button class="chip" data-filter="accounting">Accounting</button>
+    <button class="chip" data-filter="design">Design</button>
+  </div>
+
+  <select class="sort-select">
+    <option value="popular">Most Popular</option>
+    <option value="rating">Highest Rated</option>
+    <option value="price_low">Price Low → High</option>
+    <option value="price_high">Price High → Low</option>
+  </select>
+</section>
+
+<div class="courses-status">
+  <span class="result-count"></span>
+  <div class="no-results" style="display:none;">No courses found</div>
+</div>
+
+<!-- COURSES GRID -->
+<section>
+<div class="popular-grid">
+
+<!-- 1 -->
+<article class="popular-card" data-category="programming">
+  <div class="popular-media">
+    <img src="/public/images/FULL STACK WEB DEVELOPMENT.jpg">
+    <span class="popular-category">Programming</span>
+    <span class="popular-price">₹35,000</span>
+  </div>
+  <div class="popular-body">
+    <div class="popular-rating"><i class="fa fa-star"></i><span>4.9</span></div>
+    <h3 class="popular-title">Full Stack Web Development</h3>
+    <p class="popular-desc">HTML, CSS, JavaScript, React, Node.js</p>
+    <a href="#" class="popular-cta">Learn More</a>
+  </div>
+</article>
+
+<!-- 2 -->
+<article class="popular-card" data-category="design">
+  <div class="popular-media">
+    <img src="/public/images/ADOVE CREATIVE SUITE MASTERY.jpg">
+    <span class="popular-category">Graphic Design</span>
+    <span class="popular-price">₹25,000</span>
+  </div>
+  <div class="popular-body">
+    <div class="popular-rating"><i class="fa fa-star"></i><span>4.8</span></div>
+    <h3 class="popular-title">Adobe Creative Suite</h3>
+    <p class="popular-desc">Photoshop, Illustrator, InDesign</p>
+    <a href="#" class="popular-cta">Learn More</a>
+  </div>
+</article>
+
+<!-- 3 -->
+<article class="popular-card" data-category="programming">
+  <div class="popular-media">
+    <img src="/public/images/PYHTON PROGRAMMING & DATA SCIENCE.jpg">
+    <span class="popular-category">Programming</span>
+    <span class="popular-price">₹30,000</span>
+  </div>
+  <div class="popular-body">
+    <div class="popular-rating"><i class="fa fa-star"></i><span>4.9</span></div>
+    <h3 class="popular-title">Python & Data Science</h3>
+    <p class="popular-desc">Python, ML, data analysis projects</p>
+    <a href="#" class="popular-cta">Learn More</a>
+  </div>
+</article>
+
+<!-- 4 -->
+<article class="popular-card" data-category="accounting">
+  <div class="popular-media">
+    <img src="/public/images/ACCOUNITG FUNDAMENTALS.jpg">
+    <span class="popular-category">Accounting</span>
+    <span class="popular-price">₹12,000</span>
+  </div>
+  <div class="popular-body">
+    <div class="popular-rating"><i class="fa fa-star"></i><span>4.7</span></div>
+    <h3 class="popular-title">Tally Prime & GST</h3>
+    <p class="popular-desc">Accounting & GST filing</p>
+    <a href="#" class="popular-cta">Learn More</a>
+  </div>
+</article>
+
+<!-- 5 -->
+<article class="popular-card" data-category="fundamentals">
+  <div class="popular-media">
+    <img src="/public/images/ms office.jpg">
+    <span class="popular-category">Fundamentals</span>
+    <span class="popular-price">₹6,000</span>
+  </div>
+  <div class="popular-body">
+    <div class="popular-rating"><i class="fa fa-star"></i><span>4.6</span></div>
+    <h3 class="popular-title">MS Office Essentials</h3>
+    <p class="popular-desc">Word, Excel, PowerPoint</p>
+    <a href="#" class="popular-cta">Learn More</a>
+  </div>
+</article>
+
+<!-- 6 -->
+<article class="popular-card" data-category="fundamentals">
+  <div class="popular-media">
+    <img src="/public/images/EXCEL.jpg">
+    <span class="popular-category">Fundamentals</span>
+    <span class="popular-price">₹8,000</span>
+  </div>
+  <div class="popular-body">
+    <div class="popular-rating"><i class="fa fa-star"></i><span>4.8</span></div>
+    <h3 class="popular-title">Advanced Excel & Power BI</h3>
+    <p class="popular-desc">Dashboards, reports & analytics</p>
+    <a href="#" class="popular-cta">Learn More</a>
+  </div>
+</article>
+
+<!-- 7 -->
+<article class="popular-card" data-category="fundamentals">
+  <div class="popular-media">
+    <img src="/public/images/CYBERSECUIRTY.jpg">
+    <span class="popular-category">Fundamentals</span>
+    <span class="popular-price">₹7,000</span>
+  </div>
+  <div class="popular-body">
+    <div class="popular-rating"><i class="fa fa-star"></i><span>4.7</span></div>
+    <h3 class="popular-title">Computer Networking</h3>
+    <p class="popular-desc">LAN, WAN, IP addressing</p>
+    <a href="#" class="popular-cta">Learn More</a>
+  </div>
+</article>
+
+<!-- 8 -->
+<article class="popular-card" data-category="programming">
+  <div class="popular-media">
+    <img src="/public/images/JAVA PROGRAMMING.jpg">
+    <span class="popular-category">Programming</span>
+    <span class="popular-price">₹18,000</span>
+  </div>
+  <div class="popular-body">
+    <div class="popular-rating"><i class="fa fa-star"></i><span>4.8</span></div>
+    <h3 class="popular-title">Data Structures & Algorithms</h3>
+    <p class="popular-desc">Logic building & coding skills</p>
+    <a href="#" class="popular-cta">Learn More</a>
+  </div>
+</article>
+
+<!-- 9 -->
+<article class="popular-card" data-category="design">
+  <div class="popular-media">
+    <img src="/public/images/e.jpg">
+    <span class="popular-category">Design</span>
+    <span class="popular-price">₹15,000</span>
+  </div>
+  <div class="popular-body">
+    <div class="popular-rating"><i class="fa fa-star"></i><span>4.7</span></div>
+    <h3 class="popular-title">UI / UX Design</h3>
+    <p class="popular-desc">Figma, wireframes, prototypes</p>
+    <a href="#" class="popular-cta">Learn More</a>
+  </div>
+</article>
+
+<!-- 10 -->
+<article class="popular-card" data-category="design">
+  <div class="popular-media">
+    <img src="/public/images/DIGITAL MARKETING.jpg">
+    <span class="popular-category">Design</span>
+    <span class="popular-price">₹10,000</span>
+  </div>
+  <div class="popular-body">
+    <div class="popular-rating"><i class="fa fa-star"></i><span>4.6</span></div>
+    <h3 class="popular-title">Digital Marketing</h3>
+    <p class="popular-desc">SEO, social media, ads</p>
+    <a href="#" class="popular-cta">Learn More</a>
+  </div>
+</article>
+
+<!-- 11 -->
+<article class="popular-card" data-category="fundamentals">
+  <div class="popular-media">
+    <img src="/public/images/o leverl.webp">
+    <span class="popular-category">Fundamentals</span>
+    <span class="popular-price">₹28,000</span>
+  </div>
+  <div class="popular-body">
+    <div class="popular-rating"><i class="fa fa-star"></i><span>4.8</span></div>
+    <h3 class="popular-title">O Level Computer Course</h3>
+    <p class="popular-desc">NIELIT syllabus, govt certification</p>
+    <a href="#" class="popular-cta">Learn More</a>
+  </div>
+</article>
+
+<!-- 12 -->
+<article class="popular-card" data-category="fundamentals">
+  <div class="popular-media">
+    <img src="/public/images/ccc.jpg">
+    <span class="popular-category">Fundamentals</span>
+    <span class="popular-price">₹3,000</span>
+  </div>
+  <div class="popular-body">
+    <div class="popular-rating"><i class="fa fa-star"></i><span>4.6</span></div>
+    <h3 class="popular-title">CCC (Computer Concepts)</h3>
+    <p class="popular-desc">Basic computer & govt exam prep</p>
+    <a href="#" class="popular-cta">Learn More</a>
+  </div>
+</article>
+
+<!-- 13 -->
+<article class="popular-card" data-category="fundamentals">
+  <div class="popular-media">
+    <img src="/public/images/DCA.jpg">
+    <span class="popular-category">Fundamentals</span>
+    <span class="popular-price">₹9,000</span>
+  </div>
+  <div class="popular-body">
+    <div class="popular-rating"><i class="fa fa-star"></i><span>4.7</span></div>
+    <h3 class="popular-title">DCA (Diploma in Computer Applications)</h3>
+    <p class="popular-desc">Computer basics, MS Office, projects</p>
+    <a href="#" class="popular-cta">Learn More</a>
+  </div>
+</article>
+
+</div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<%- include('partials/Footer') %>
+
+</body>
+</html>

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Fees Management</title>
+  <link rel="stylesheet" href="/public/css/admin.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    .fees-container {
+      max-width: 900px;
+      margin: 30px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    .student-info {
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+      border-left: 5px solid #7b2cff;
+    }
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+    }
+    .info-item label {
+      display: block;
+      font-size: 12px;
+      color: #666;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .info-item div {
+      font-size: 16px;
+      font-weight: 700;
+      color: #333;
+    }
+    .fee-form {
+      background: #fff;
+      border: 1px solid #eee;
+      padding: 25px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+    }
+    .form-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: #7b2cff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #444;
+    }
+    .form-control {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+    .btn-submit {
+      background: #00c851;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s;
+    }
+    .btn-submit:hover {
+      background: #007e33;
+    }
+    .history-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    .history-table th, .history-table td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+    .history-table th {
+      background: #f8f9fa;
+      color: #555;
+      font-weight: 600;
+    }
+    .status-badge {
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .badge-paid { background: #e8f5e9; color: #2e7d32; }
+    .badge-pending { background: #fff3e0; color: #ef6c00; }
+  </style>
+</head>
+<body class="admin-body">
+
+<header class="dashboard-header">
+  <div class="dashboard-title">
+    <i class="fa-solid fa-money-bill-wave"></i>
+    Fees Management
+  </div>
+  <div class="dashboard-actions">
+    <a href="/admin/dashboard<%= locals.searchQuery ? '?search=' + locals.searchQuery : '' %>" class="btn-upload" style="background:#555;">
+      <i class="fa-solid fa-arrow-left"></i> Back to Dashboard
+    </a>
+  </div>
+</header>
+
+<div class="fees-container">
+  
+  <!-- Student Summary -->
+  <div class="student-info">
+    <div class="info-grid">
+      <div class="info-item">
+        <label>Student Name</label>
+        <div><%= student.name %></div>
+      </div>
+      <div class="info-item">
+        <label>Reg Number</label>
+        <div><%= student.regNumber %></div>
+      </div>
+      <div class="info-item">
+        <label>Total Fees <i class="fa-solid fa-pen" style="cursor:pointer; color:#33b5e5; font-size:12px; margin-left:5px;" onclick="toggleTotalFeeEdit()"></i></label>
+        <div id="totalFeeDisplay">₹<%= student.totalFees || 0 %></div>
+        <form action="/admin/fees/update-total" method="POST" id="totalFeeForm" style="display:none; margin-top:5px;">
+          <input type="hidden" name="regNumber" value="<%= student.regNumber %>">
+          <input type="number" name="totalFees" value="<%= student.totalFees || 0 %>" style="width:100px; padding:5px; border:1px solid #ddd; border-radius:4px;">
+          <button type="submit" style="background:#00c851; color:white; border:none; padding:5px 8px; border-radius:4px; cursor:pointer;"><i class="fa-solid fa-check"></i></button>
+          <button type="button" onclick="toggleTotalFeeEdit()" style="background:#ff4444; color:white; border:none; padding:5px 8px; border-radius:4px; cursor:pointer;"><i class="fa-solid fa-times"></i></button>
+        </form>
+      </div>
+      <div class="info-item">
+        <label>Fees Paid</label>
+        <div style="color:#00c851;">₹<%= student.feesSubmitted || 0 %></div>
+      </div>
+      <div class="info-item">
+        <label>Balance Pending</label>
+        <div style="color:#ff4444;">₹<%= (student.totalFees || 0) - (student.feesSubmitted || 0) %></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Fee Form -->
+  <div class="fee-form">
+    <div class="form-title">
+      <span id="formTitleText"><i class="fa-solid fa-plus-circle"></i> Add New Payment</span>
+      <button id="cancelEditBtn" style="display:none; margin-left:auto; font-size:12px; background:#ddd; border:none; padding:5px 10px; cursor:pointer; border-radius:4px;">Cancel Edit</button>
+    </div>
+    <form action="/admin/fees/update" method="POST" id="feeForm">
+      <input type="hidden" name="regNumber" value="<%= student.regNumber %>">
+      <input type="hidden" name="transactionId" id="transactionId">
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label>Payment Date</label>
+          <input type="date" name="date" id="dateInput" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label>Day</label>
+          <input type="text" name="day" id="dayInput" class="form-control" readonly style="background:#f0f0f0;">
+        </div>
+        <div class="form-group">
+          <label>Amount (₹)</label>
+          <input type="number" name="amount" id="amountInput" class="form-control" placeholder="Enter amount" required min="1">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group" style="grid-column: span 3;">
+          <label>Remarks / Payment Type</label>
+          <input type="text" name="remarks" id="remarksInput" class="form-control" placeholder="e.g. Installment 1, Exam Fees, etc.">
+        </div>
+      </div>
+
+      <button type="submit" class="btn-submit" id="submitBtn">
+        <i class="fa-solid fa-check"></i> Save Payment
+      </button>
+    </form>
+  </div>
+
+  <!-- Fee History -->
+  <div class="table-card">
+    <div class="table-header">
+      <div class="table-title">Payment History (<%= student.feeHistory ? student.feeHistory.length : 0 %> Updates)</div>
+    </div>
+    <div class="table-responsive">
+      <table class="history-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Day</th>
+            <th>Amount</th>
+            <th>Remarks</th>
+            <th>Recorded By</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (student.feeHistory && student.feeHistory.length > 0) { %>
+            <% student.feeHistory.slice().reverse().forEach(record => { %>
+              <tr>
+                <td><%= record.date %></td>
+                <td><%= record.day %></td>
+                <td style="font-weight:bold; color:#00c851;">+ ₹<%= record.amount %></td>
+                <td><%= record.remarks || '-' %></td>
+                <td style="font-size:12px; color:#777;"><%= record.by || 'Admin' %></td>
+                <td>
+                  <button type="button" class="action-btn btn-edit" 
+                          onclick="editTransaction('<%= record.id %>', '<%= record.date %>', '<%= record.amount %>', '<%= record.remarks %>')"
+                          title="Edit">
+                    <i class="fa-solid fa-pen"></i>
+                  </button>
+                  <form action="/admin/fees/delete-transaction" method="POST" style="display:inline;" onsubmit="return confirm('Delete this transaction? This will reduce the paid amount.');">
+                    <input type="hidden" name="regNumber" value="<%= student.regNumber %>">
+                    <input type="hidden" name="transactionId" value="<%= record.id %>">
+                    <button type="submit" class="action-btn btn-delete" title="Delete">
+                      <i class="fa-solid fa-trash"></i>
+                    </button>
+                  </form>
+                </td>
+              </tr>
+            <% }) %>
+          <% } else { %>
+            <tr>
+              <td colspan="6" style="text-align:center; padding:20px; color:#888;">No payment history found.</td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // Set default date to today
+  const dateInput = document.getElementById('dateInput');
+  const dayInput = document.getElementById('dayInput');
+  const amountInput = document.getElementById('amountInput');
+  const remarksInput = document.getElementById('remarksInput');
+  const feeForm = document.getElementById('feeForm');
+  const transactionIdInput = document.getElementById('transactionId');
+  const submitBtn = document.getElementById('submitBtn');
+  const formTitleText = document.getElementById('formTitleText');
+  const cancelEditBtn = document.getElementById('cancelEditBtn');
+
+  const today = new Date();
+  const yyyy = today.getFullYear();
+  const mm = String(today.getMonth() + 1).padStart(2, '0');
+  const dd = String(today.getDate()).padStart(2, '0');
+  
+  dateInput.value = `${yyyy}-${mm}-${dd}`;
+  updateDay();
+
+  dateInput.addEventListener('change', updateDay);
+
+  function updateDay() {
+    const date = new Date(dateInput.value);
+    if (!isNaN(date.getTime())) {
+      const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      dayInput.value = days[date.getDay()];
+    } else {
+      dayInput.value = '';
+    }
+  }
+
+  function editTransaction(id, date, amount, remarks) {
+    if (!id || id === 'undefined') {
+      alert("Cannot edit legacy records without ID. Please delete and re-add if necessary.");
+      return;
+    }
+    
+    // Scroll to form
+    document.querySelector('.fee-form').scrollIntoView({ behavior: 'smooth' });
+
+    // Set values
+    transactionIdInput.value = id;
+    dateInput.value = date;
+    amountInput.value = amount;
+    remarksInput.value = remarks;
+    updateDay();
+
+    // Change Form Mode
+    feeForm.action = "/admin/fees/edit-transaction";
+    submitBtn.innerHTML = '<i class="fa-solid fa-pen-to-square"></i> Update Payment';
+    submitBtn.style.background = "#33b5e5";
+    formTitleText.innerHTML = '<i class="fa-solid fa-pen-to-square"></i> Edit Payment';
+    cancelEditBtn.style.display = "inline-block";
+  }
+
+  cancelEditBtn.addEventListener('click', () => {
+    // Reset Form
+    feeForm.reset();
+    transactionIdInput.value = "";
+    dateInput.value = `${yyyy}-${mm}-${dd}`;
+    updateDay();
+    
+    // Reset Mode
+    feeForm.action = "/admin/fees/update";
+    submitBtn.innerHTML = '<i class="fa-solid fa-check"></i> Save Payment';
+    submitBtn.style.background = "#00c851";
+    formTitleText.innerHTML = '<i class="fa-solid fa-plus-circle"></i> Add New Payment';
+    cancelEditBtn.style.display = "none";
+  });
+
+  function toggleTotalFeeEdit() {
+    const display = document.getElementById('totalFeeDisplay');
+    const form = document.getElementById('totalFeeForm');
+    if (form.style.display === 'none') {
+      form.style.display = 'block';
+      display.style.display = 'none';
+    } else {
+      form.style.display = 'none';
+      display.style.display = 'block';
+    }
+  }
+</script>
+
+</body>
+</html>

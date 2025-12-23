@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Login</title>
+
+  <!-- STUDENT CSS -->
+  <link rel="stylesheet" href="/public/css/student.css">
+
+  <!-- FONT AWESOME -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body class="student-login-page">
+
+  <div class="student-login-container">
+    <div class="student-login-card">
+
+      <!-- TITLE -->
+      <div class="student-login-title">
+        <i class="fa-solid fa-user-graduate"></i>
+        Student Login
+      </div>
+
+      <p class="student-login-subtitle">
+        Enter your details to view your certificate
+      </p>
+
+      <!-- ERROR -->
+      <% if (error) { %>
+        <div class="student-error">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <%= error %>
+        </div>
+      <% } %>
+
+      <!-- FORM -->
+      <form method="POST" action="/student/check">
+
+        <div class="student-input-group">
+          <i class="fa-solid fa-id-card"></i>
+          <input type="text"
+                 name="regNumber"
+                 class="student-input"
+                 placeholder="Registration Number"
+                 required>
+        </div>
+
+        <div class="student-input-group">
+          <i class="fa-solid fa-cake-candles"></i>
+          <input type="date"
+                 name="dob"
+                 class="student-input"
+                 required>
+        </div>
+
+        <button type="submit" class="student-login-btn">
+          View Certificate <i class="fa-solid fa-eye"></i>
+        </button>
+
+      </form>
+
+      <!-- LINKS -->
+      <div class="student-links">
+        <a href="/home" class="student-link-main">
+          <i class="fa-solid fa-house"></i> Go to Website
+        </a>
+
+        <a href="/admin/login" class="student-link-alt">
+          <i class="fa-solid fa-user-shield"></i> Admin Login
+        </a>
+      </div>
+
+      <!-- FOOTER -->
+      <div class="student-footer">
+        © 2025 Ganga Computer Center
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

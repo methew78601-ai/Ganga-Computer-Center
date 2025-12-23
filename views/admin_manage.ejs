@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Manage Admins</title>
+
+  <link rel="stylesheet" href="/public/css/admin.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body class="admin-body">
+
+<!-- ================= HEADER ================= -->
+<header class="dashboard-header">
+  <div class="dashboard-title">
+    <i class="fa-solid fa-users-gear" style="color:#7b2cff;"></i>
+    Manage Admins
+    <span>
+      Logged in as
+      <strong><%= adminUser %></strong>
+    </span>
+  </div>
+
+  <div class="dashboard-actions">
+    <a href="/admin/dashboard" class="btn-upload">
+      <i class="fa-solid fa-arrow-left"></i> Dashboard
+    </a>
+
+    <a href="/admin/logout" class="btn-logout">
+      <i class="fa-solid fa-right-from-bracket"></i> Logout
+    </a>
+  </div>
+</header>
+
+<!-- ================= MAIN ================= -->
+<div class="dashboard-container">
+
+  <!-- ================= ADD ADMIN (ONLY SUPER ADMIN) ================= -->
+  <% if (currentRole === 'super') { %>
+  <div class="table-card">
+    <div class="table-header">
+      <div class="table-title">Add New Admin</div>
+    </div>
+
+    <div style="padding:20px;">
+      <form method="POST" action="/admin/add"
+            style="display:flex;gap:15px;flex-wrap:wrap;">
+        <input class="admin-input"
+               name="username"
+               placeholder="Username"
+               required>
+
+        <input class="admin-input"
+               name="password"
+               placeholder="Password"
+               required>
+
+        <button class="admin-login-btn" style="max-width:220px;">
+          <i class="fa-solid fa-user-plus"></i> Add Admin
+        </button>
+      </form>
+    </div>
+  </div>
+  <% } %>
+
+  <!-- ================= ADMIN LIST ================= -->
+  <div class="table-card">
+    <div class="table-header">
+      <div class="table-title">Existing Admins</div>
+    </div>
+
+    <div class="table-responsive">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Role</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        <% admins.forEach(a => { %>
+          <tr>
+            <td><%= a.username %></td>
+
+            <td>
+              <% if (a.role === 'super') { %>
+                <span class="status active">Super Admin</span>
+              <% } else { %>
+                <span class="status">Admin</span>
+              <% } %>
+            </td>
+
+            <td>
+              <% if (a.username === adminUser) { %>
+                <span class="status active">You</span>
+              <% } else { %>
+                —
+              <% } %>
+            </td>
+
+            <td>
+              <!-- DELETE ADMIN (ONLY SUPER, NOT SELF, NOT SUPER) -->
+              <% if (
+                currentRole === 'super' &&
+                a.username !== adminUser &&
+                a.role !== 'super'
+              ) { %>
+                <form method="POST"
+                      action="/admin/delete-admin"
+                      onsubmit="return confirm('Delete this admin?');"
+                      style="display:inline;">
+                  <input type="hidden" name="username" value="<%= a.username %>">
+                  <button class="btn-delete" title="Delete Admin">
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+                </form>
+              <% } %>
+
+              <!-- MAKE SUPER ADMIN (ONLY SUPER) -->
+              <% if (
+                currentRole === 'super' &&
+                a.role === 'admin'
+              ) { %>
+                <form method="POST"
+                      action="/admin/make-super"
+                      onsubmit="return confirm('Make this admin SUPER ADMIN?');"
+                      style="display:inline;">
+                  <input type="hidden" name="username" value="<%= a.username %>">
+                  <button class="btn-upload"
+                          style="padding:6px 10px;font-size:12px;"
+                          title="Make Super Admin">
+                    <i class="fa-solid fa-crown"></i>
+                  </button>
+                </form>
+              <% } %>
+
+              <% if (currentRole !== 'super') { %>
+                —
+              <% } %>
+            </td>
+          </tr>
+        <% }) %>
+        </tbody>
+
+      </table>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

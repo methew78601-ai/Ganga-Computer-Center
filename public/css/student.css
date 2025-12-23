@@ -1,0 +1,185 @@
+/* ================= GOOGLE FONT ================= */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* ================= RESET ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ================= PAGE ================= */
+body.student-login-page {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #eef2ff, #f8f9ff);
+  color: #333;
+}
+
+/* ================= CONTAINER ================= */
+.student-login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* ================= CARD ================= */
+.student-login-card {
+  background: #fff;
+  width: 100%;
+  max-width: 420px;
+  padding: 40px;
+  border-radius: 22px;
+  text-align: center;
+  box-shadow: 0 15px 35px rgba(123,44,255,0.18);
+  animation: slideFade 0.8s ease forwards;
+}
+
+@keyframes slideFade {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ================= TITLES ================= */
+.student-login-title {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #7b2cff;
+}
+
+.student-login-title i {
+  margin-right: 6px;
+}
+
+.student-login-subtitle {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 25px;
+}
+
+/* ================= INPUTS ================= */
+.student-input-group {
+  position: relative;
+  margin-bottom: 18px;
+}
+
+.student-input-group i {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #aaa;
+}
+
+.student-input {
+  width: 100%;
+  padding: 13px 15px 13px 45px;
+  border: 2px solid #eee;
+  border-radius: 14px;
+  font-size: 14px;
+  outline: none;
+  transition: 0.3s;
+}
+
+.student-input:focus {
+  border-color: #7b2cff;
+  box-shadow: 0 0 0 4px rgba(123,44,255,0.12);
+  transform: scale(1.02);
+}
+
+/* ================= BUTTON ================= */
+.student-login-btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(90deg, #7b2cff, #8a2be2);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.student-login-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(123,44,255,0.35);
+}
+
+/* ================= ERROR ================= */
+.student-error {
+  background: #fff0f0;
+  color: #e03131;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  animation: shake 0.4s ease;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
+/* ================= LINKS ================= */
+.student-links {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.student-link-main {
+  background: #7b2cff;
+  color: #fff;
+  padding: 12px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.student-link-main:hover {
+  background: #6a00ff;
+}
+
+.student-link-alt {
+  background: #f1f3f5;
+  color: #555;
+  padding: 12px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* ================= FOOTER ================= */
+.student-footer {
+  margin-top: 30px;
+  font-size: 13px;
+  color: #888;
+  text-align: center;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  .student-login-card {
+    padding: 30px 25px;
+  }
+}

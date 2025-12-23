@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ganga Computer Center - Home</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <link rel="stylesheet" href="/public/css/style.css">
+</head>
+<body>
+
+  <%- include('partials/header') %>
+
+  <!-- Home Slider -->
+  <section class="home">
+    <div class="swiper home-slider">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide slide1">
+          <img class="slide-img" src="/public/images/home-slide-1.jpeg" alt="Slide 1">
+          <div class="content animate-fade">
+            <span>Explore the World</span>
+            <h3>The World Best Computer Course</h3>
+            <a href="/course" class="btn">Start Now</a>
+          </div>
+        </div>
+
+        <div class="swiper-slide slide2">
+          <img class="slide-img" src="/public/images/home-slide-2.jpg" alt="Slide 2">
+          <div class="content animate-up">
+            <span>Explore the World</span>
+            <h3>The World Best Computer Course</h3>
+            <a href="/course" class="btn">Start Now</a>
+          </div>
+        </div>
+
+        <div class="swiper-slide slide3">
+          <img class="slide-img" src="/public/images/home-slide-3.jpg" alt="Slide 3">
+          <div class="content animate-right">
+            <span>Explore the World</span>
+            <h3>The World Best Computer Course</h3>
+            <a href="/course" class="btn">Start Now</a>
+          </div>
+          
+        </div>
+        <div class="swiper-slide slide3">
+          <img class="slide-img" src="/public/images/FULL STACK WEB DEVELOPMENT.jpg" alt="Slide 3">
+          <div class="content animate-right">
+            <span>Explore the World</span>
+            <h3>The World Best Computer Course</h3>
+            <a href="/course" class="btn">Start Now</a>
+          </div>
+          
+        </div>
+      </div>
+       
+
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </section>
+
+  <!-- Marquee -->
+  <section class="marquee">
+    <div class="marquee-content">
+      <p>We'll show you the way to success &nbsp;&nbsp;&nbsp; We'll show you the way to success &nbsp;&nbsp;&nbsp; We'll show you the way to success</p>
+    </div>
+  </section>
+
+  <!-- Popular Courses (Dynamic from app.js) -->
+  <section class="courses-about">
+    <div class="courses-about-container">
+      <h2>Popular Courses We Offer</h2>
+
+      <div class="courses-about-container-course-box">
+        <% popularCourses.forEach(c => { %>
+          <div class="courses-about-container-course">
+            <div class="icon"><i class="<%= c.icon %>"></i></div>
+            <h3><%= c.title %></h3>
+            <p><%= c.desc %></p>
+          </div>
+        <% }) %>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Short -->
+  <section class="home-about">
+    <div class="image animate-left">
+      <img src="/public/images/about-img.jpg" alt="About us">
+    </div>
+    <div class="content animate-right">
+      <h3>About Us</h3>
+      <p>Education at Ganga Computer Center is designed to meet the demands of an ever-evolving digital world. We provide practical computer skills and technical knowledge for students to succeed in digital careers.</p>
+      <a href="/about" class="btn">Read More <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+  </section>
+
+  <!-- Motivation -->
+  <section class="motivation">
+    <h2><span>Share your Dreams with us</span></h2>
+    <h1><b>Gain a new Skill in <span class="highlight">Easy Way</span>, Achieve your <span class="highlight">Goal</span></b></h1>
+    <p>Do not stop like water just flow and merge with sea and reach destination,<br>
+       get ready and join with us to achieve your aim.</p>
+
+    <div class="btn-container">
+      <a href="/contact" class="msg-btn"><i class="fas fa-envelope"></i> Send Message</a>
+      <a href="/contact" class="demo-btn"><i class="fas fa-gift"></i> Book Your Free Demo Class</a>
+    </div>
+  </section>
+
+  <!-- Reviews (Dynamic) -->
+  <section class="reviews-section">
+    <h2>Students Reviews</h2>
+
+    <div class="reviews-container">
+      <% reviews.forEach((r, idx) => { %>
+        <div class="review-card <%= idx === 0 ? 'active' : '' %>">
+          <p>"<%= r.msg %>"</p>
+          <img src="<%= r.img %>" alt="student">
+          <h3><%= r.name %></h3>
+        </div>
+      <% }) %>
+    </div>
+
+    <button class="prev">&#10094;</button>
+    <button class="next">&#10095;</button>
+
+    <div class="dots"></div>
+  </section>
+
+  <!-- Stats -->
+  <section class="stats-container">
+    <div class="stat">
+      <div class="number" data-target="<%= stats.years %>">0</div>
+      <div class="label">Years</div>
+    </div>
+    <div class="stat">
+      <div class="number" data-target="<%= stats.students %>">0</div>
+      <div class="label">Students</div>
+    </div>
+    <div class="stat">
+      <div class="number" data-target="<%= stats.courses %>">0</div>
+      <div class="label">Courses</div>
+    </div>
+    <div class="stat">
+      <div class="number" data-target="<%= stats.websites %>">0</div>
+      <div class="label">Websites</div>
+    </div>
+  </section>
+
+  <!-- Diagram Section -->
+  <section id="scholar-study-solution" class="study-section">
+    <div class="container">
+      <div class="image-container">
+        <img src="/public/images/g-daigram.png" alt="Ganga Diagram">
+      </div>
+    </div>
+  </section>
+
+  <!-- Custom Slider -->
+  <section class="custom-slider-section">
+    <div class="custom-slider-container">
+      <button class="custom-slider-btn custom-slider-left">&#10094;</button>
+
+      <div class="custom-slider-track">
+        <div class="custom-slide" style="background-image: url('/public/images/programming.jpg');">
+          <span>BACKEND</span>
+        </div>
+        <div class="custom-slide" style="background-image: url('/public/images/css.jpg');">
+          <span>CSS</span>
+        </div>
+        <div class="custom-slide" style="background-image: url('/public/images/backend.jpg');">
+          <span>FRONTEND</span>
+        </div>
+        <div class="custom-slide" style="background-image: url('/public/images/Video\ Editing\ &\ Motion\ Graphics.jpg');">
+          <span>GRAPHIC</span>
+        </div>
+        <div class="custom-slide" style="background-image: url('/public/images/ACCOUNITG\ FUNDAMENTALS.jpg');">
+          <span>ACCOUNTING</span>
+        </div>
+      </div>
+
+      <button class="custom-slider-btn custom-slider-right">&#10095;</button>
+    </div>
+  </section>
+
+  <%- include('partials/footer') %>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="/public/js/main.js"></script>
+</body>
+</html>

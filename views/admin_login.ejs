@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login</title>
+
+  <!-- ADMIN CSS -->
+  <link rel="stylesheet" href="/public/css/admin.css">
+
+  <!-- FONT AWESOME -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body class="admin-body">
+
+  <div class="admin-login-container">
+    <div class="admin-login-card">
+
+      <div class="admin-login-title">Admin Login</div>
+      <p class="admin-login-subtitle">
+        Sign in to access dashboard
+      </p>
+
+      <% if (error) { %>
+        <div class="error-box" style="
+          background:#fff0f0;
+          color:#e03131;
+          padding:10px;
+          border-radius:10px;
+          margin-bottom:20px;
+          font-size:14px;">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <%= error %>
+        </div>
+      <% } %>
+
+      <!-- LOGIN FORM -->
+      <form method="POST" action="/admin/login" id="loginForm">
+
+        <div class="admin-input-group">
+          <i class="fa-solid fa-user"></i>
+          <input type="text"
+                 name="username"
+                 class="admin-input"
+                 placeholder="Username"
+                 required>
+        </div>
+
+        <div class="admin-input-group">
+          <i class="fa-solid fa-lock"></i>
+          <input type="password"
+                 name="password"
+                 class="admin-input"
+                 placeholder="Password"
+                 required>
+        </div>
+
+        <button type="submit" class="admin-login-btn" id="loginBtn">
+          Login <i class="fa-solid fa-arrow-right"></i>
+        </button>
+
+        <!-- BOOK LOADER -->
+        <div class="login-loader" id="loginLoader">
+          <div class="book">
+            <div class="book-page"></div>
+            <div class="book-page"></div>
+            <div class="book-page"></div>
+          </div>
+        </div>
+
+      </form>
+
+      <!-- EXTRA NAV BUTTONS -->
+      <div style="
+        margin-top:25px;
+        display:flex;
+        flex-direction:column;
+        gap:12px;">
+
+        <!-- GO TO WEBSITE -->
+        <a href="/home"
+           class="btn-upload"
+           style="justify-content:center;">
+          <i class="fa-solid fa-globe"></i>
+          Go to Website
+        </a>
+
+        <!-- STUDENT LOGIN -->
+        <a href="/student/login"
+           style="
+             text-decoration:none;
+             text-align:center;
+             padding:12px;
+             border-radius:12px;
+             font-weight:600;
+             background:#f1f3f5;
+             color:#555;">
+          <i class="fa-solid fa-user-graduate"></i>
+          Student Login
+        </a>
+
+      </div>
+
+      <div class="admin-footer">
+        © 2025 Ganga Computer Center
+      </div>
+
+    </div>
+  </div>
+
+  <!-- LOGIN LOADER SCRIPT -->
+  <script>
+    const form = document.getElementById("loginForm");
+    const loader = document.getElementById("loginLoader");
+    const btn = document.getElementById("loginBtn");
+
+    form.addEventListener("submit", () => {
+      btn.classList.add("loading");
+      btn.innerHTML = "Logging in...";
+      loader.style.display = "flex";
+    });
+  </script>
+
+</body>
+</html>

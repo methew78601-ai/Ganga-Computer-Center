@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Registrations</title>
+  <link rel="stylesheet" href="/public/css/admin.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    .student-img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #ddd;
+    }
+    .status-paid { color: #00c851; font-weight: 600; }
+    .status-pending { color: #ffbb33; font-weight: 600; }
+    .btn-add {
+      background: #7b2cff;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-add:hover {
+      background: #6a00ff;
+    }
+    .action-btn {
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      margin-right: 4px;
+    }
+    .btn-edit { background: #33b5e5; color: white; }
+    .btn-delete { background: #ff4444; color: white; }
+  </style>
+</head>
+<body class="admin-body">
+
+<header class="dashboard-header">
+  <div class="dashboard-title">
+    <i class="fa-solid fa-users"></i>
+    Student Registrations
+  </div>
+  <div class="dashboard-actions">
+    <a href="/admin/dashboard" class="btn-upload" style="background:#555;">
+      <i class="fa-solid fa-arrow-left"></i> Dashboard
+    </a>
+    <a href="/admin/registrations/add" class="btn-add">
+      <i class="fa-solid fa-user-plus"></i> Add New Student
+    </a>
+  </div>
+</header>
+
+<div class="dashboard-container">
+  <div class="table-card">
+    <div class="table-header">
+      <div class="table-title">All Students</div>
+    </div>
+    
+    <div class="table-responsive">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Photo</th>
+            <th>Reg No</th>
+            <th>Course</th>
+            <th>Name / Father's Name</th>
+            <th>Contact</th>
+            <th>Fees (Paid / Total)</th>
+            <th>Pending</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (!students || students.length === 0) { %>
+            <tr><td colspan="7" style="text-align:center;padding:20px;">No students found</td></tr>
+          <% } else { %>
+            <% students.forEach(s => { 
+                const total = Number(s.totalFees) || 0;
+                const paid = Number(s.feesSubmitted) || 0;
+                const pending = total - paid;
+            %>
+            <tr>
+              <td>
+                <% if (s.photo) { %>
+                  <img src="<%= s.photo %>" class="student-img" alt="Student">
+                <% } else { %>
+                  <div class="student-img" style="background:#f0f0f0;display:flex;align-items:center;justify-content:center;font-size:18px;">
+                    <i class="fa-solid fa-user" style="color:#bbb;"></i>
+                  </div>
+                <% } %>
+              </td>
+              <td><%= s.regNumber %></td>
+              <td><span style="background:#e0f2f1; color:#00695c; padding:3px 8px; border-radius:12px; font-size:12px; font-weight:600;"><%= s.course || 'N/A' %></span></td>
+              <td>
+                <div><strong><%= s.name %></strong></div>
+                <div style="font-size:12px;color:#666;">F: <%= s.fatherName || '-' %></div>
+              </td>
+              <td>
+                <div><%= s.contact1 || '-' %></div>
+                <% if(s.contact2){ %><div style="font-size:12px;color:#666;"><%= s.contact2 %></div><% } %>
+              </td>
+              <td>
+                <%= paid %> / <%= total %>
+              </td>
+              <td>
+                <% if(pending > 0) { %>
+                  <span class="status-pending"><%= pending %></span>
+                <% } else { %>
+                  <span class="status-paid">Clear</span>
+                <% } %>
+              </td>
+              <td>
+                <a href="/admin/registrations/edit/<%= s.regNumber %>" class="action-btn btn-edit">
+                  <i class="fa-solid fa-pen"></i>
+                </a>
+                <form action="/admin/registrations/delete" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure?');">
+                  <input type="hidden" name="regNumber" value="<%= s.regNumber %>">
+                  <button type="submit" class="action-btn btn-delete"><i class="fa-solid fa-trash"></i></button>
+                </form>
+              </td>
+            </tr>
+            <% }) %>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

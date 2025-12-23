@@ -1,0 +1,319 @@
+/* ================= GOOGLE FONT ================= */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* ================= RESET ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+body.admin-body {
+  font-family: 'Poppins', sans-serif;
+  background: #f4f6fb;
+  color: #333;
+}
+
+/* =================================================
+   =============== ADMIN LOGIN =====================
+================================================= */
+
+.admin-login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #eef2ff, #f8f9ff);
+  padding: 20px;
+}
+
+.admin-login-card {
+  background: #fff;
+  width: 100%;
+  max-width: 420px;
+  padding: 36px 32px;
+  border-radius: 22px;
+  text-align: center;
+  box-shadow: 0 15px 35px rgba(123,44,255,0.18);
+}
+
+.admin-login-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.admin-login-subtitle {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 26px;
+}
+
+.admin-input-group {
+  position: relative;
+  margin-bottom: 18px;
+}
+
+.admin-input-group i {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #aaa;
+}
+
+.admin-input {
+  width: 100%;
+  padding: 13px 15px 13px 45px;
+  border-radius: 14px;
+  border: 2px solid #eee;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.admin-input:focus {
+  border-color: #7b2cff;
+  box-shadow: 0 0 0 4px rgba(123,44,255,0.12);
+}
+
+.admin-login-btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(90deg, #7b2cff, #8a2be2);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.admin-login-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(123,44,255,0.35);
+}
+
+.admin-login-btn.loading {
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+/* LOGIN LOADER */
+.login-loader {
+  display: none;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.book {
+  width: 44px;
+  height: 32px;
+  position: relative;
+  perspective: 150px;
+}
+
+.book-page {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #7b2cff;
+  border-radius: 4px;
+  transform-origin: left;
+  animation: flip 1.2s infinite ease-in-out;
+}
+
+.book-page:nth-child(2) { animation-delay: .2s; opacity: .75; }
+.book-page:nth-child(3) { animation-delay: .4s; opacity: .5; }
+
+@keyframes flip {
+  0% { transform: rotateY(0deg); }
+  50% { transform: rotateY(-90deg); }
+  100% { transform: rotateY(0deg); }
+}
+
+/* =================================================
+   =============== DASHBOARD =======================
+================================================= */
+
+.dashboard-header {
+  background: #fff;
+  padding: 18px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  box-shadow: 0 6px 25px rgba(0,0,0,0.06);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.dashboard-title {
+  font-size: 20px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.dashboard-title span {
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+}
+
+.dashboard-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* ================= BUTTONS ================= */
+.btn-upload {
+  background: #7b2cff;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.btn-upload:hover {
+  background: #6a00ff;
+  transform: translateY(-1px);
+}
+
+.btn-logout {
+  background: #f1f3f5;
+  color: #444;
+  padding: 10px 16px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* ================= MAIN CONTAINER ================= */
+.dashboard-container {
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 0 15px;
+}
+
+/* ================= TABLE CARD ================= */
+.table-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.07);
+  overflow: hidden;
+  margin-bottom: 25px;
+}
+
+.table-header {
+  padding: 18px 22px;
+  border-bottom: 1px solid #eee;
+}
+
+.table-title {
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ================= TABLE ================= */
+.admin-table {
+  width: 100%;
+  min-width: 900px;
+  border-collapse: collapse;
+}
+
+.admin-table th {
+  background: #f9fafb;
+  padding: 14px 20px;
+  font-size: 13px;
+  color: #777;
+  text-align: left;
+}
+
+.admin-table td {
+  padding: 14px 20px;
+  border-bottom: 1px solid #f1f1f1;
+  font-size: 14px;
+}
+
+.admin-table tr:hover {
+  background: #f8f9ff;
+}
+
+/* ================= ACTIONS ================= */
+.btn-delete {
+  background: #fff0f0;
+  color: #e03131;
+  border: none;
+  padding: 7px 12px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-delete:hover {
+  background: #ffe3e3;
+}
+
+.view-link {
+  color: #7b2cff;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ================= FOOTER ================= */
+.admin-footer {
+  margin: 30px 0;
+  text-align: center;
+  font-size: 13px;
+  color: #888;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .dashboard-actions {
+    width: 100%;
+  }
+
+  .btn-upload,
+  .btn-logout {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .admin-table {
+    min-width: 750px;
+  }
+
+  .admin-login-card {
+    padding: 30px 24px;
+  }
+}

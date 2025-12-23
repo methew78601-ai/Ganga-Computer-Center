@@ -1,0 +1,280 @@
+/* =========================
+   COURSES PAGE CSS
+   ========================= */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  background: #f5f7fb;
+  color: #1f2937;
+}
+
+/* =========================
+   HERO SECTION (NAVY MATCH)
+   ========================= */
+
+.course-hero {
+  background: linear-gradient(135deg, #0b1c2d, #12355b);
+  color: #ffffff;
+  padding: 55px 20px;
+  text-align: center;
+}
+
+.course-hero h1 {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+.course-hero p {
+  font-size: 16px;
+  opacity: 0.95;
+}
+
+.course-stats {
+  margin-top: 22px;
+  display: flex;
+  justify-content: center;
+  gap: 26px;
+  flex-wrap: wrap;
+}
+
+.course-stats span {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* =========================
+   CONTROLS (SEARCH / FILTER)
+   ========================= */
+
+.courses-controls {
+  display: grid;
+  grid-template-columns: 1.5fr 2fr 1fr;
+  gap: 16px;
+  padding: 20px;
+  background: #f5f7fb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.search-input {
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  font-size: 14px;
+  width: 100%;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #0b1c2d;
+}
+
+/* =========================
+   FILTER CHIPS
+   ========================= */
+
+.chips {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.chip {
+  border: none;
+  background: #e8eef6;
+  color: #0b1c2d;
+  padding: 8px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: 0.3s;
+}
+
+.chip.active,
+.chip:hover {
+  background: #0b1c2d;
+  color: #ffffff;
+}
+
+/* =========================
+   SORT SELECT
+   ========================= */
+
+.sort-select {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  font-size: 14px;
+}
+
+/* =========================
+   STATUS
+   ========================= */
+
+.courses-status {
+  padding: 10px 20px;
+  font-size: 14px;
+}
+
+.no-results {
+  color: #dc2626;
+  margin-top: 6px;
+}
+
+/* =========================
+   COURSES GRID
+   ========================= */
+
+.popular-grid {
+  padding: 22px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+/* =========================
+   COURSE CARD
+   ========================= */
+
+.popular-card {
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(11,28,45,0.12);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.popular-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 34px rgba(11,28,45,0.18);
+}
+
+.popular-media {
+  position: relative;
+  height: 180px;
+}
+
+.popular-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* =========================
+   BADGES
+   ========================= */
+
+.popular-category {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 12px;
+}
+
+.popular-price {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #0b1c2d;
+  color: #ffffff;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 12px;
+}
+
+/* =========================
+   CARD BODY
+   ========================= */
+
+.popular-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.popular-rating {
+  font-size: 13px;
+  color: #f59e0b;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.popular-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: #0b1c2d;
+}
+
+.popular-desc {
+  font-size: 13px;
+  color: #4b5563;
+  line-height: 1.5;
+}
+
+/* =========================
+   CTA BUTTON
+   ========================= */
+
+.popular-cta {
+  margin-top: auto;
+  text-align: center;
+  padding: 10px;
+  border-radius: 10px;
+  background: #0b1c2d;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.popular-cta:hover {
+  background: #12355b;
+}
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 992px) {
+  .popular-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .courses-controls {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 576px) {
+  .course-hero h1 {
+    font-size: 28px;
+  }
+
+  .course-hero p {
+    font-size: 14px;
+  }
+
+  .popular-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .search-input,
+  .sort-select {
+    width: 100%;
+  }
+}
