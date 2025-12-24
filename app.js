@@ -112,6 +112,11 @@ app.use(express.json());
 app.use("/public", express.static(PUBLIC_DIR));
 app.use("/uploads", express.static(UPLOADS_DIR));
 
+// Google Search Console Verification
+app.get("/google*.html", (req, res) => {
+  res.sendFile(path.join(__dirname, req.path));
+});
+
 /* ================= DOWNLOAD ROUTE ================= */
 app.get("/download/:filename", (req, res) => {
   const filePath = path.join(UPLOADS_DIR, req.params.filename);
