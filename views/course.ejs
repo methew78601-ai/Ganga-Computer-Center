@@ -1,16 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Courses – Anime Computers</title>
-
+  <%- include('partials/head') %>
   <!-- COURSE PAGE CSS -->
   <link rel="stylesheet" href="/public/css/courses.css">
-
-  <!-- FONT AWESOME -->
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <!-- COURSE PAGE JS -->
   <script src="/public/js/course-search.js" defer></script>
@@ -18,7 +11,7 @@
 <body>
 
 <!-- HEADER -->
-<%- include('partials/Header') %>
+<%- include('partials/header') %>
 
 <!-- HERO -->
 <section class="course-hero">
@@ -265,7 +258,7 @@
 </main>
 
 <!-- FOOTER -->
-<%- include('partials/Footer') %>
+<%- include('partials/footer') %>
 
 </body>
 </html>
